@@ -1,0 +1,62 @@
+<div class="loading" *ngIf="!characters">
+   Cargando....
+</div>
+<div class="col-md-12" *ngIf="characters">
+    <h2><img src="../../../assets/camera-movie.png"> {{title}}</h2>
+    <br>
+    
+  <div >
+    <input type="text" value="Total de Personajes  {{characters.length}}" class="field left" readonly>
+    &nbsp;
+    
+    <input type="text" style="background-image: url('../../../assets/Iconodevivo.png'); background-repeat: no-repeat; background-position: left;"  value="&nbsp;  &nbsp; personajes vivos 8 " class="field left" readonly>
+    &nbsp;
+    <input type="text" style="background-image: url('../../../assets/Iconodemuerto.png'); background-repeat: no-repeat; background-position: left;" value="&nbsp;   personajes muertos  6" class="field left" readonly>
+    &nbsp;
+    <input type="search" style="background-image: url('../../../assets/Iconodbusqueda.png'); background-repeat: no-repeat; background-position: left;"  value="&nbsp; &nbsp; Busqueda" readonly >
+  </div>   
+    
+    <br>
+    <br>
+
+    <nz-table [nzData]="characters">
+        <thead style="color: #10454F; background-color:lightgray;">
+          <tr>
+            <th>Nombre</th>
+            <th>Vivo</th>
+            <th>Especie</th>
+            <th>Genero</th>
+            <th>Origen</th>
+            <th>Locación</th>
+            <th>Capitulos</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody >
+          <tr *ngFor="let character of characters"> 
+            <td>{{character.name}}</td>
+            <td *ngIf="character.status == 'Alive' else elseBlock">
+              <img src="../../../assets/Iconodevivo.png">
+            </td>
+            <ng-template #elseBlock>
+              <td *ngIf="character.status == 'Dead' else elseBlock1"><img src="../../../assets/Iconodemuerto.png"></td>
+            </ng-template>
+            <ng-template #elseBlock1>
+               <td>unknown</td>
+            </ng-template>
+            <td>{{character.species}}</td>
+            <td>{{character.gender}}</td>
+            <td>{{names[character.id-1]}}</td>
+            <td>{{locat[character.id-1]}}</td>
+            <td>{{epi[character.id-1]}}</td>
+            <td>
+              {{character.created}}</td>
+            <td>{{character.image}}</td>
+          </tr>
+          
+        </tbody>
+      </nz-table>
+
+    
+</div>
